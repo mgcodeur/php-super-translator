@@ -1,0 +1,16 @@
+{
+    "name": "mgcodeur/super-translator",
+    "autoload": {
+        "psr-4": {
+            "Mgcodeur\\SuperTranslator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ANDRIANAMBININA Iharena Jimmy Raphaël (mgcodeur)",
+            "email": "mgcodeur@gmail.com"
+        }
+    ],
+    "require": {},
+    "version": "1.0.0"
+}
