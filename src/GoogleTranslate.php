@@ -24,6 +24,7 @@ class GoogleTranslate
         CURLOPT_URL => "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t",
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => '',
+        CURLOPT_USERAGENT => '',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => 'UTF-8',
         CURLOPT_SSL_VERIFYPEER => false,
