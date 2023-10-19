@@ -2,6 +2,7 @@
 
 namespace Mgcodeur\SuperTranslator\Traits;
 
+use Campo\UserAgent;
 use Mgcodeur\SuperTranslator\DataTransfertObject\TranslationResultData;
 
 trait HasTranslation
@@ -13,7 +14,7 @@ trait HasTranslation
     protected static function requestTranslation($from, $to, $text)
     {
         if (mb_strlen($text) > 5000) {
-            $textChunked = self::chunkSplitAtClosestDot($text, 5000);
+            $textChunked = self::splitAtClosestDot($text, 5000);
 
             $result = [];
             
@@ -35,6 +36,12 @@ trait HasTranslation
 
         $ch = curl_init();
         $options = self::setCurlOptionByKey(CURLOPT_POSTFIELDS, $fields_string);
+        
+        $options = self::setCurlOptionByKey(CURLOPT_USERAGENT, UserAgent::random([
+            'os_type' => UserAgent::getOSTypes(),
+            'device_type' => UserAgent::getDeviceTypes()
+        ]));
+
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
         curl_close($ch);
@@ -104,7 +111,7 @@ trait HasTranslation
         return self::$curl_options;
     }
 
-    private static function chunkSplitAtClosestDot($input, $chunkSize = 5000) {
+    private static function splitAtClosestDot($input, $chunkSize = 5000) {
         $chunks = [];
         $length = strlen($input);
     
