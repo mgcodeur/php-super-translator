@@ -13,7 +13,7 @@ composer require mgcodeur/super-translator
 ## Basic Usage
 
 ``` php
-require_once 'vendor/autoload.php';
+require_once 'vendor/autoload.php'; // if you don't use autoloading
 use Mgcodeur\SuperTranslator\GoogleTranslate;
 
 $from = 'en';
@@ -30,13 +30,28 @@ echo $translatedText;
 If you want to automatically detect the language of the text to translate, you can use the `translateAuto` method of the `GoogleTranslate` class like this:
 
 ``` php
-require_once 'vendor/autoload.php';
+require_once 'vendor/autoload.php'; // if you don't use autoloading
 use Mgcodeur\SuperTranslator\GoogleTranslate;
 
 $to = 'fr';
 $text = 'Hello World!';
 
 $translatedText = GoogleTranslate::translateAuto($to, $text);
+echo $translatedText;
+// Output: Bonjour le monde!
+```
+
+You can alse use 'auto' as the value of the `$from` parameter:
+
+``` php
+require_once 'vendor/autoload.php'; // if you don't use autoloading
+use Mgcodeur\SuperTranslator\GoogleTranslate;
+
+$from = 'auto';
+$to = 'fr';
+$text = 'Hello World!';
+
+$translatedText = GoogleTranslate::translate($from, $to, $text);
 echo $translatedText;
 // Output: Bonjour le monde!
 ```

@@ -1,5 +1,24 @@
 {
     "name": "mgcodeur/super-translator",
+    "type": "library",
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "SuperTranslator is a PHP package that allows you to translate text from one language to another using the Google Translate API.",
+    "keywords": [
+        "php",
+        "free",
+        "google",
+        "translate",
+        "translator",
+        "language",
+        "api",
+        "text",
+        "translation",
+        "translate-api",
+        "google-translate-api",
+        "google-translate",
+        "google-api"
+    ],
     "autoload": {
         "psr-4": {
             "Mgcodeur\\SuperTranslator\\": "src/"
@@ -11,6 +30,11 @@
             "email": "mgcodeur@gmail.com"
         }
     ],
-    "require": {},
-    "version": "1.0.0"
+    "scripts": {
+        "test": "phpunit --testdox --no-coverage --colors=always"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.4",
+        "symfony/var-dumper": "^6.3"
+    }
 }

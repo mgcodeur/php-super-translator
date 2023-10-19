@@ -4,3 +4,9 @@ composer.lock
 # IDE
 .idea
 .vscode
+
+# Tests
+.phpunit.cache
+
+# Build
+build
