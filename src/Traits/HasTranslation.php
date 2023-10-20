@@ -58,7 +58,7 @@ trait HasTranslation
     protected static function getGoogleTranslationResult($json)
     {
         $result = "";
-        if ($json->isChunked) {
+        if (gettype($json) === 'object' && $json->isChunked) {
             foreach ($json->result as $sentence) {
                 $sentencesArray = json_decode($sentence, true);
                 $result .= self::validateAndFormatResponseSentence($sentencesArray);
