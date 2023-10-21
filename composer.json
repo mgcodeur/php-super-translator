@@ -31,7 +31,7 @@
         }
     ],
     "scripts": {
-        "test": "phpunit --testdox --no-coverage --colors=always"
+        "tests": "phpunit --testdox --no-coverage --colors=always"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.4",
