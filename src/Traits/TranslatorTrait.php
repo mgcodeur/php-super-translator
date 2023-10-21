@@ -11,7 +11,7 @@ trait TranslatorTrait
         CURLOPT_URL => "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t",
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => '',
-        CURLOPT_USERAGENT => '',
+        // CURLOPT_USERAGENT => '',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => 'UTF-8',
         CURLOPT_SSL_VERIFYPEER => false,
@@ -48,10 +48,10 @@ trait TranslatorTrait
         $ch = curl_init();
         $options = self::setCurlOptionByKey(CURLOPT_POSTFIELDS, $fields_string);
         
-        $options = self::setCurlOptionByKey(CURLOPT_USERAGENT, UserAgent::random([
-            'os_type' => UserAgent::getOSTypes(),
-            'device_type' => UserAgent::getDeviceTypes()
-        ]));
+        // $options = self::setCurlOptionByKey(CURLOPT_USERAGENT, UserAgent::random([
+        //     'os_type' => UserAgent::getOSTypes(),
+        //     'device_type' => UserAgent::getDeviceTypes()
+        // ]));
 
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
