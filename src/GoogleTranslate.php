@@ -37,16 +37,12 @@ class GoogleTranslate
         if(is_array($to)) {
             $result = [];
             foreach($to as $t) {
-                $response = self::requestTranslation($from, $t, $text);
-                $translatedText = self::getGoogleTranslationResult($response);
-                $result[$t] = $translatedText;
+                $result[$t] = self::translate($from, $t, $text);
             }
             return $result;
         }
-
-        $response = self::requestTranslation($from, $to, $text);
-        $translatedText = self::getGoogleTranslationResult($response);
-        return $translatedText;
+        
+        return self::runTranslation($from, $to, $text);
     }
 
     /**
@@ -65,15 +61,25 @@ class GoogleTranslate
         if(is_array($to)) {
             $result = [];
             foreach($to as $t) {
-                $response = self::requestTranslation('auto', $t, $text);
-                $translatedText = self::getGoogleTranslationResult($response);
-                $result[$t] = $translatedText;
+                $result[$t] = self::translateAuto($t, $text);
             }
             return $result;
         }
 
-        $response = self::requestTranslation('auto', $to, $text);
+        return self::runTranslation('auto', $to, $text);
+    }
+
+    /**
+     * Run translation process
+     * @param string $from (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string|array $to (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string|array $text (Text to translate)
+     */
+    public static function runTranslation($from, $to, $text)
+    {
+        $response = self::requestTranslation($from, $to, $text);
         $translatedText = self::getGoogleTranslationResult($response);
+
         return $translatedText;
     }
 }
