@@ -1,7 +1,7 @@
 ## About SuperTranslator
 
 SuperTranslator is a PHP package that allows you to translate text from one language to another using the Google Translate API.
-<br/><br/>
+<br/>
 
 ## Installation
 
@@ -10,7 +10,7 @@ Install the package via composer:
 ```bash
 composer require mgcodeur/super-translator
 ```
-<br/><br/>
+<br/>
 
 ## Basic Usage
 
@@ -26,7 +26,7 @@ $translatedText = GoogleTranslate::translate($from, $to, $text);
 echo $translatedText;
 // Output: Bonjour le monde!
 ```
-<br/><br/>
+<br/>
 
 ## Automatic language detection
 
@@ -59,7 +59,7 @@ $translatedText = GoogleTranslate::translate($from, $to, $text);
 echo $translatedText;
 // Output: Bonjour le monde!
 ```
-<br/><br/>
+<br/>
 
 ## Translate multiple languages
 
