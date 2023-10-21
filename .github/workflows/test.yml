@@ -25,7 +25,7 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Run Tests
-      run: composer run tests --testdox --verbose --colors=always
+      run: composer run tests
 
     - name: Check test results
       run: |
