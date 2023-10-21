@@ -1,0 +1,37 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches:
+      - main 
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 7.4 
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Run Tests
+      run: composer run tests --testdox --verbose --colors=always
+
+    - name: Check test results
+      run: |
+        if [ $? -eq 0 ]; then
+          echo "Tests passed. Continuing..."
+        else
+          echo "Tests failed. Exiting..."
+          exit 1
+        fi
