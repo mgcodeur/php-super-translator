@@ -37,11 +37,11 @@ class GoogleTranslate
         if(is_array($to)) {
             $result = [];
             foreach($to as $t) {
-                $result[$t] = self::runTranslation($from, $t, $text);
+                $result[$t] = self::translate($from, $t, $text);
             }
             return $result;
         }
-
+        
         return self::runTranslation($from, $to, $text);
     }
 
@@ -61,18 +61,25 @@ class GoogleTranslate
         if(is_array($to)) {
             $result = [];
             foreach($to as $t) {
-                $result[$t] = self::runTranslation('auto', $t, $text);
+                $result[$t] = self::translateAuto($t, $text);
             }
             return $result;
         }
-        
+
         return self::runTranslation('auto', $to, $text);
     }
 
-    private static function runTranslation($from, $to, $text)
+    /**
+     * Run translation process
+     * @param string $from (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string|array $to (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string|array $text (Text to translate)
+     */
+    public static function runTranslation($from, $to, $text)
     {
         $response = self::requestTranslation($from, $to, $text);
         $translatedText = self::getGoogleTranslationResult($response);
+
         return $translatedText;
     }
 }

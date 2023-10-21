@@ -1,6 +1,7 @@
 ## About SuperTranslator
 
 SuperTranslator is a PHP package that allows you to translate text from one language to another using the Google Translate API.
+<br/><br/>
 
 ## Installation
 
@@ -9,6 +10,7 @@ Install the package via composer:
 ```bash
 composer require mgcodeur/super-translator
 ```
+<br/><br/>
 
 ## Basic Usage
 
@@ -24,6 +26,7 @@ $translatedText = GoogleTranslate::translate($from, $to, $text);
 echo $translatedText;
 // Output: Bonjour le monde!
 ```
+<br/><br/>
 
 ## Automatic language detection
 
@@ -41,6 +44,7 @@ echo $translatedText;
 // Output: Bonjour le monde!
 ```
 
+<br/>
 You can alse use 'auto' as the value of the `$from` parameter:
 
 ``` php
@@ -54,6 +58,33 @@ $text = 'Hello World!';
 $translatedText = GoogleTranslate::translate($from, $to, $text);
 echo $translatedText;
 // Output: Bonjour le monde!
+```
+<br/><br/>
+
+## Translate multiple languages
+
+If you want to translate a text into multiple languages, you just have to pass an array of languages to the `translate` or `translateAuto` method of the `GoogleTranslate` class like this:
+
+<br/>
+
+``` php
+require_once 'vendor/autoload.php'; // if you don't use autoloading
+use Mgcodeur\SuperTranslator\GoogleTranslate;
+
+$from = 'en';
+$to = ['fr', 'es', 'de'];
+
+$text = 'Hello World!';
+
+$translatedText = GoogleTranslate::translate($from, $to, $text);
+
+//Nb: the $translatedText variable is an array
+
+# Output: [
+#    'fr' => 'Bonjour le monde!',
+#    'es' => '¡Hola Mundo!',
+#    'de' => 'Hallo Welt!'
+# ]
 ```
 
 <div>

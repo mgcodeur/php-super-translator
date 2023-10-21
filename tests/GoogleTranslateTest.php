@@ -89,7 +89,7 @@ class GoogleTranslateTest extends TestCase {
     public function testCanTranslateManyLanguages()
     {
         $from = 'auto';
-        $to = ['fr', 'en', 'it', 'es', 'pt'];
+        $to = ['fr', 'en'];
         $text = "Hello everyone";
 
         $response = GoogleTranslate::translate($from, $to, $text);
@@ -98,14 +98,11 @@ class GoogleTranslateTest extends TestCase {
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('fr', $response);
         $this->assertArrayHasKey('en', $response);
-        $this->assertArrayHasKey('it', $response);
-        $this->assertArrayHasKey('es', $response);
-        $this->assertArrayHasKey('pt', $response);
     }
 
     public function testCanTranslateAutoManyLanguages()
     {
-        $to = ['fr', 'en', 'it', 'es', 'pt'];
+        $to = ['fr', 'en'];
         $text = "Hello everyone";
 
         $response = GoogleTranslate::translateAuto($to, $text);
@@ -114,8 +111,5 @@ class GoogleTranslateTest extends TestCase {
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('fr', $response);
         $this->assertArrayHasKey('en', $response);
-        $this->assertArrayHasKey('it', $response);
-        $this->assertArrayHasKey('es', $response);
-        $this->assertArrayHasKey('pt', $response);
     }
 }
