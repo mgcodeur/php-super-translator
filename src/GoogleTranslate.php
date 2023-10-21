@@ -1,6 +1,6 @@
 <?php
 namespace Mgcodeur\SuperTranslator;
-use Mgcodeur\SuperTranslator\Traits\HasTranslation;
+use Mgcodeur\SuperTranslator\Traits\TranslatorTrait;
 
 /**
  * GoogleTranslate.class.php
@@ -18,26 +18,15 @@ use Mgcodeur\SuperTranslator\Traits\HasTranslation;
  */
 class GoogleTranslate
 {
-    use HasTranslation;
-
-    protected static $curl_options = [
-        CURLOPT_URL => "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t",
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => '',
-        CURLOPT_USERAGENT => '',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => 'UTF-8',
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLOPT_SSL_VERIFYHOST => false,
-    ];
+    use TranslatorTrait;
 
     /**
      * Translate text from a language to another
      * @param string $from (ISO 639-1 code eg. en, fr, it, es, pt)
-     * @param string $to (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string|array $to (ISO 639-1 code eg. en, fr, it, es, pt)
      * @param string $text (Text to translate)
      * @throws \Exception
-     * @return string
+     * @return string|array
      */
     public static function translate($from, $to, $text)
     {
@@ -45,23 +34,46 @@ class GoogleTranslate
             throw new \Exception("Text cannot be empty");
         }
 
+        if(is_array($to)) {
+            $result = [];
+            foreach($to as $t) {
+                $response = self::requestTranslation($from, $t, $text);
+                $translatedText = self::getGoogleTranslationResult($response);
+                $result[$t] = $translatedText;
+            }
+            return $result;
+        }
+
         $response = self::requestTranslation($from, $to, $text);
-
-        $translation = self::getGoogleTranslationResult($response);
-
-        return $translation;
+        $translatedText = self::getGoogleTranslationResult($response);
+        return $translatedText;
     }
 
+    /**
+     * Translate text from a language to another
+     * @param string|array $to (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string $text (Text to translate)
+     * @throws \Exception
+     * @return string|array
+     */
     public static function translateAuto($to, $text)
     {
         if (empty($text)) {
             throw new \Exception("Text cannot be empty");
         }
 
+        if(is_array($to)) {
+            $result = [];
+            foreach($to as $t) {
+                $response = self::requestTranslation('auto', $t, $text);
+                $translatedText = self::getGoogleTranslationResult($response);
+                $result[$t] = $translatedText;
+            }
+            return $result;
+        }
+
         $response = self::requestTranslation('auto', $to, $text);
-
-        $translation = self::getGoogleTranslationResult($response);
-
-        return $translation;
+        $translatedText = self::getGoogleTranslationResult($response);
+        return $translatedText;
     }
 }

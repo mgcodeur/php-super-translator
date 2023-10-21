@@ -5,8 +5,19 @@ namespace Mgcodeur\SuperTranslator\Traits;
 use Campo\UserAgent;
 use Mgcodeur\SuperTranslator\DataTransfertObject\TranslationResultData;
 
-trait HasTranslation
+trait TranslatorTrait
 {
+    protected static $curl_options = [
+        CURLOPT_URL => "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t",
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => '',
+        CURLOPT_USERAGENT => '',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => 'UTF-8',
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYHOST => false,
+    ];
+
     /**
      * make the request to the translator service
      * @param string $from (ISO 639-1 code eg. en, fr, it, es, pt)
@@ -58,7 +69,10 @@ trait HasTranslation
     protected static function getGoogleTranslationResult($json)
     {
         $result = "";
-        if (gettype($json) === 'object' && $json->isChunked) {
+        
+        $objectIsChunked = gettype($json) === 'object' && $json->isChunked;
+
+        if ($objectIsChunked) {
             foreach ($json->result as $sentence) {
                 $sentencesArray = json_decode($sentence, true);
                 $result .= self::validateAndFormatResponseSentence($sentencesArray);
