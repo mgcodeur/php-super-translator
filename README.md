@@ -94,7 +94,8 @@ $translatedText = GoogleTranslate::translate($from, $to, $text);
     </a>
 </div>
 
-## Contributors
+## Contributors ✨
+Thanks go to these wonderful people ✨✨:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
