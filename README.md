@@ -1,4 +1,6 @@
 [![Run Tests](https://github.com/mgcodeur/php-super-translator/actions/workflows/test.yml/badge.svg)](https://github.com/mgcodeur/php-super-translator/actions/workflows/test.yml)
+![Packagist Downloads (custom server)](https://img.shields.io/packagist/dt/mgcodeur/super-translator?style=flat-square&logo=packagist&logoColor=white&labelColor=blue&color=orange)
+
 <br/>
 
 ## About SuperTranslator
@@ -91,3 +93,14 @@ $translatedText = GoogleTranslate::translate($from, $to, $text);
         <img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=mgcodeur&button_colour=FF5F5F&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00"/>
     </a>
 </div>
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END --
