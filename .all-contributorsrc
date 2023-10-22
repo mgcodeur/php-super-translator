@@ -1,0 +1,31 @@
+{
+  "projectName": "php-super-translator",
+  "projectOwner": "mgcodeur",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "contributors": [
+    {
+      "login": "mgcodeur",
+      "name": "ANDRIANAMBININA Iharena Jimmy Raphaël",
+      "avatar_url": "https://avatars.githubusercontent.com/u/91603608?v=4",
+      "profile": "https://github.com/mgcodeur",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "infra",
+        "maintenance",
+        "platform",
+        "review",
+        "security",
+        "test",
+        "tool",
+        "translation",
+        "tutorial",
+        "userTesting"
+      ]
+    }
+  ]
+}
