@@ -48,6 +48,7 @@ trait TranslatorTrait
         $ch = curl_init();
         $options = self::setCurlOptionByKey(CURLOPT_POSTFIELDS, $fields_string);
         
+        //TODO: add fake user agent
         // $options = self::setCurlOptionByKey(CURLOPT_USERAGENT, UserAgent::random([
         //     'os_type' => UserAgent::getOSTypes(),
         //     'device_type' => UserAgent::getDeviceTypes()
@@ -125,6 +126,12 @@ trait TranslatorTrait
         return self::$curl_options;
     }
 
+    /**
+     * Split a string at the closest dot to the specified chunk size
+     * @param string $input (String to split)
+     * @param int $chunkSize (Maximum size of each chunk)
+     * @return array
+     */
     private static function splitAtClosestDot($input, $chunkSize = 5000) {
         $chunks = [];
         $length = strlen($input);
@@ -153,5 +160,45 @@ trait TranslatorTrait
         }
     
         return $chunks;
+    }
+    
+    /**
+     * Run translation process
+     * @param string $from (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string|array $to (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string|array $text (Text to translate)
+     * @return string|array
+     */
+    private static function runTranslation($from, $to, $text)
+    {
+        $response = self::requestTranslation($from, $to, $text);
+        $translatedText = self::getGoogleTranslationResult($response);
+
+        return $translatedText;
+    }
+
+    /**
+     * Translate text from a language to another
+     * @param string $from (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string|array $to (ISO 639-1 code eg. en, fr, it, es, pt)
+     * @param string $text (Text to translate)
+     * @throws \Exception
+     * @return string|array
+     */
+    private static function translateText($from, $to, $text)
+    {
+        if (empty($text)) {
+            throw new \Exception("Text cannot be empty");
+        }
+
+        if(is_array($to)) {
+            $result = [];
+            foreach($to as $t) {
+                $result[$t] = self::translateAuto($t, $text);
+            }
+            return $result;
+        }
+
+        return self::runTranslation($from, $to, $text);
     }
 }

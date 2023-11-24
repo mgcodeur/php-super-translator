@@ -27,11 +27,8 @@ jobs:
     - name: Run Tests
       run: composer run tests
 
-    - name: Check test results
+    - name: Check results
+      if: failure()
       run: |
-        if [ $? -eq 0 ]; then
-          echo "Tests passed. Continuing..."
-        else
-          echo "Tests failed. Exiting..."
-          exit 1
-        fi
+        echo "Failed to merge. Please check the build logs for details."
+      

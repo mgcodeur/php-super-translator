@@ -30,19 +30,7 @@ class GoogleTranslate
      */
     public static function translate($from, $to, $text)
     {
-        if (empty($text)) {
-            throw new \Exception("Text cannot be empty");
-        }
-
-        if(is_array($to)) {
-            $result = [];
-            foreach($to as $t) {
-                $result[$t] = self::translate($from, $t, $text);
-            }
-            return $result;
-        }
-        
-        return self::runTranslation($from, $to, $text);
+        return self::translateText($from, $to, $text);
     }
 
     /**
@@ -54,32 +42,6 @@ class GoogleTranslate
      */
     public static function translateAuto($to, $text)
     {
-        if (empty($text)) {
-            throw new \Exception("Text cannot be empty");
-        }
-
-        if(is_array($to)) {
-            $result = [];
-            foreach($to as $t) {
-                $result[$t] = self::translateAuto($t, $text);
-            }
-            return $result;
-        }
-
-        return self::runTranslation('auto', $to, $text);
-    }
-
-    /**
-     * Run translation process
-     * @param string $from (ISO 639-1 code eg. en, fr, it, es, pt)
-     * @param string|array $to (ISO 639-1 code eg. en, fr, it, es, pt)
-     * @param string|array $text (Text to translate)
-     */
-    public static function runTranslation($from, $to, $text)
-    {
-        $response = self::requestTranslation($from, $to, $text);
-        $translatedText = self::getGoogleTranslationResult($response);
-
-        return $translatedText;
+        return self::translateText('auto', $to, $text);
     }
 }
