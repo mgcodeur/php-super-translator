@@ -2,7 +2,7 @@
 
 namespace Mgcodeur\SuperTranslator\Traits;
 
-use Campo\UserAgent;
+// use Campo\UserAgent;
 use Mgcodeur\SuperTranslator\DataTransfertObject\TranslationResultData;
 
 trait TranslatorTrait
@@ -75,13 +75,11 @@ trait TranslatorTrait
 
         if ($objectIsChunked) {
             foreach ($json->result as $sentence) {
-                $sentencesArray = json_decode($sentence, true);
-                $result .= self::validateAndFormatResponseSentence($sentencesArray);
+                $result .= self::formatResult($sentence);
             }
         } 
         else {
-            $sentencesArray = json_decode($json, true);
-            $result .= self::validateAndFormatResponseSentence($sentencesArray);
+            $result = self::formatResult($json);
         }
         
         return $result;
@@ -99,6 +97,7 @@ trait TranslatorTrait
     
         return $processedResult;
     }
+
     /**
      * generate the query string
      * @param array $params
@@ -200,5 +199,10 @@ trait TranslatorTrait
         }
 
         return self::runTranslation($from, $to, $text);
+    }
+    
+    private static function formatResult($sentence) {
+        $sentencesArray = json_decode($sentence, true);
+        return self::validateAndFormatResponseSentence($sentencesArray);
     }
 }
